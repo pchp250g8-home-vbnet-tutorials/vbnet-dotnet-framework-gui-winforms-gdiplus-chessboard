@@ -4,20 +4,18 @@
     End Sub
 
     Private Sub Form1_Paint(sender As Object, e As PaintEventArgs) Handles MyBase.Paint
-        Dim k As Integer = 0
         Dim Width As Integer = ClientSize.Width / 8
         Dim Height As Integer = ClientSize.Height / 8
         Dim rects(32) As Rectangle
         Dim g As Graphics = e.Graphics
         g.Clear(Color.Aqua)
-        For i As Integer = 0 To 7
-            For j As Integer = i Mod 2 To 7 Step 2
-                Dim Left As Integer = i * Width
-                Dim Top As Integer = j * Height
-                rects(k) = New Rectangle(Left, Top, Width, Height)
-                k += 1
-            Next j
-        Next i
+        For k As Integer = 0 To 31
+            Dim i As Integer = k \ 4
+            Dim j As Integer = (k Mod 4) * 2 + (i Mod 2)
+            Dim Left As Integer = i * Width
+            Dim Top As Integer = j * Height
+            rects(k) = New Rectangle(Left, Top, Width, Height)
+        Next k
         g.FillRectangles(Brushes.Brown, rects)
     End Sub
 
